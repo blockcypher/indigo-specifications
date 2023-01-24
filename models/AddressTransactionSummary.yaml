@@ -1,0 +1,68 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents summarized data about a transaction input or output for a specific address. 
+  Typically found in an array within an Address object, which is usually returned from the standard Address Endpoint.
+type: object
+required:
+  - tx_hash
+  - index
+  - total
+  - confirmations
+properties:
+  tx_hash:
+    description: >-
+      The hash of the transaction
+    type: string
+    example: f854aebae95150b379cc1187d848d58225f3c4157fe992bcd166f58bd5063449
+  block_height:
+    description: >-
+      Height of the block that contains this transaction
+    type: string
+    format: bigint
+    minimum: 0
+    example: 293000
+  confirmed_at:
+    description: >-
+      Time at which transaction was included in a block; only present for confirmed transactions.
+    type: string
+    format: date-time
+  index:
+    description: >-
+      Index of this input/output in the enclosing transaction. 
+      Negative for inputs, positive for outputs.
+    type: integer
+    format: int32
+    example: 1
+  total:
+    # I think the anything that can be above uint64 should be string
+    description: >-
+      The total number of base units exchanged in this transaction.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 703200221545
+  confirmations:
+    description: >-
+      Number of subsequent blocks, including the block the transaction is in. Unconfirmed transactions have 0 confirmations.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 1
+  spent_by:
+    description: >-
+      If this transaction is a double-spend (i.e. double_spend == true) then this is the hash of the transaction it's double-spending.
+    type: string
+    example: 5fa6b133baf33e47748683595848fbb5cb899f711aacc082bfa605bf2e3a1298

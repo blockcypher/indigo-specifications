@@ -1,0 +1,71 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents a transaction payload. Mainly used to create a transaction. 
+  A transaction is the transfer of value with the on chain currency. 
+  For contract transaction, see the ContractTransactionPayload.
+type: object
+required:
+  - from
+  - to
+  - value
+properties:
+  from:
+    description: >-
+      Sender of the transaction.
+    type: string
+    example: 34ch2jrhYXDFsLK1FZQ3SjqgFRnX8mGC5W
+  nonce:
+    description: >-
+      The transaction count of the account.
+    type: integer
+    format: uint64
+    example: 10
+  to:
+    description: >-
+      Recipient.
+    type: string
+    example: 1N2f642sbgCMbNtXFajz9XDACDFnFzdXzV
+  gas_limit:
+    description: >-
+      The gas limit
+    type: integer
+    format: uint64
+    example: 500000
+  max_fee_per_gas:
+    description: >-
+      Max Fee Per Gas refer to the max amount a user is willing to pay for their transaction.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 83490998906
+  max_priority_fee_per_gas:
+    description: >-
+      Max Priority Fee Per Gas refer to the max amount a user is willing to give to the miner.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 1000000000
+  value:
+    description: >-
+      The total number, in base currency units, to send to the recipient.
+    type: string
+    format: bigint
+    example: 1000000000
+  data:
+    description: >-
+      Optional data to embed in this transaction. E.g. contract execution or creation.
+    type: string
+    example: 23b872dd0000000000000000000000009635ea48535709316bdbeb7465f1b850520ef4c3000000000000000000000000285e456950190f531cdf06c33bbd74f37072725400000000000000000000000000000000000000000000000000000000000f4240

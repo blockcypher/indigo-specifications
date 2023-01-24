@@ -1,0 +1,112 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents the state of an address/account, containing information about the state of balances and transactions related to this address.
+type: object
+required:
+  - address
+  - balance
+  - unconfirmed_balance
+  - final_balance
+  - n_tx
+  - unconfirmed_n_tx
+  - final_n_tx
+properties:
+  address:
+    description: >-
+      The address
+    type: string
+    example: 0x738d145fAAbb1E00Cf5A017588A9C0F998318012
+  total_received:
+    description: >-
+      Total amount of confirmed base units received by this address.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 9762206505909057760
+  total_sent:
+    description: >-
+      Total amount of confirmed base units sent by this address.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 9742951942909057760
+  balance:
+    description: >-
+      Balance of confirmed base units on this address.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 19254563000000000
+  unconfirmed_balance:
+    description: >-
+      Balance of unconfirmed base units on this address.
+    type: string
+    format: bigint
+    example: 0
+  final_balance:
+    description: >-
+      Total balance in base units, including confirmed and unconfirmed transactions, for this address.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 19254563000000000
+  n_tx:
+    description: >-
+      Number of confirmed transactions on this address. Only transactions that have made it into a block (confirmations > 0) are counted.
+    type: integer
+    format: uint64
+    example: 704
+  unconfirmed_n_tx:
+    description: >-
+      Number of unconfirmed transactions for this address. Only unconfirmed transactions (confirmations == 0) are counted.
+    type: integer
+    format: uint64
+    example: 0
+  final_n_tx:
+    description: >-
+      Final number of transactions, including confirmed and unconfirmed transactions, for this address.
+    type: integer
+    format: uint64
+    example: 704
+  nonce:
+    description: >-
+      Current nonce for this address.
+    type: integer
+    format: uint64
+    example: 1
+  pool_nonce:
+    description: >-
+      Pool nonce for this address.
+    type: integer
+    format: uint64
+    example: 2
+  txs:
+    description: >-
+      Array of transaction summaries for this address.
+    type: array
+    items:
+      $ref: "AddressTransactionSummary.yaml"
+  unconfirmed_txs:
+    description: >-
+      All unconfirmed transaction summaries for this address.
+    type: array
+    items:
+      $ref: "AddressTransactionSummary.yaml"
+  has_more:
+    description: >-
+      Whether the address object contains more transactions than shown. Useful for determining whether to poll the API for more transaction information.
+    type: boolean
+    example: true

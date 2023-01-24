@@ -1,0 +1,68 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents an input consumed within a transaction. Typically found within an array in a TX.
+  For UTXO-based blockchain, inputs are from previous UTXOs, with the most prominent exceptions being attempted double-spend and coinbase inputs.
+type: object
+properties:
+  prev_hash:
+    description: >-
+      The previous transaction hash where this input was an output.
+    type: string
+    example: e5c9be87798b0fa8ad55a22b5d731d6f50d72bffaa6179f9999499e57388cc33
+  output_index:
+    description: >-
+      The index of the output being spent within the previous transaction.
+    type: integer
+    format: uint32
+    example: 1
+  output_value:
+    description: >-
+      The value of the output being spent within the previous transaction.
+    type: string
+    minimum: 0
+    example: 2450698356
+  script_type:
+    description: >-
+      The type of script that encumbers the output corresponding to this input.
+    type: string
+    example: 00000000000000000000d9a5f38fe5625d0d9f0a2400887b785ad22a84c12f55
+  script:
+    description: >-
+      Raw hexadecimal encoding of the script.
+    type: string
+    example: pay-to-script-hash
+  addresses:
+    description: >-
+      An array of public addresses associated with the output of the previous transaction
+    type: array
+    items:
+      description: >-
+        An address
+      type: string
+      example: 34ch2jrhYXDFsLK1FZQ3SjqgFRnX8mGC5W
+    example: [34ch2jrhYXDFsLK1FZQ3SjqgFRnX8mGC5W]
+  sequence:
+    description: >-
+      For Bitcoin based blockchain, a legacy 4-byte sequence number.
+    type: integer
+    format: uint32
+    example: 4294967295
+  nonce:
+    description: >-
+      The transaction count of the account.
+    type: integer
+    format: uint64
+    example: 10

@@ -1,0 +1,58 @@
+on: [push]
+
+jobs:
+  check-license:
+    runs-on: ubuntu-latest
+    name: Check License
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+      - run: make go-deps
+      - run: make check-license
+  check-spelling:
+    runs-on: ubuntu-latest
+    name: Check Spelling
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+      - run: make go-deps
+      - run: make spellcheck
+  check-gen:
+    runs-on: ubuntu-latest
+    name: Check Gen
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+      - run: make node-deps
+      - run: make check-gen
+  check-valid:
+    runs-on: ubuntu-latest
+    name: Check Valid
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+      - run: make node-deps
+      - run: make check-valid
+  salus:
+    runs-on: ubuntu-latest
+    name: Salus Security Scan
+    steps:
+      - uses: actions/checkout@v3
+      - name: Salus Scan
+        id: salus_scan
+        uses: federacy/scan-action@0.1.4
+  release:
+    # Publish for a tag starting with v.
+    runs-on: ubuntu-latest
+    name: Create Release
+    needs: [check-license, check-spelling, check-gen, check-valid, salus]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: make node-deps
+      - run: make bundle
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: api.json

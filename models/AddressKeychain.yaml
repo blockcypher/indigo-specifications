@@ -1,0 +1,36 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents an associated collection of public and private keys alongside their respective public address.
+type: object
+required:
+  - address
+  - private
+properties:
+  address:
+    description: >-
+      The address.
+    type: string
+    example: 0x6e7813BacE742C0dd2e271Bb728E9CE240FDefb6
+  public:
+    description: >-
+      Hex-encoded public key.
+    type: string
+    example: 043df9cc04f157ee198ae0b4b9c68cfe8ee6923bd7e7ba7f478b306c0f8e259bad85aebcf490a0495a386bfcc380ff9677dbfb2349cc2cfea777bb666bd779f978
+  private:
+    description: >-
+      Hex-encoded private key.
+    type: string
+    example: 73010a7382af1facc3d90dc71dbc140b3c50fc539d2b9b64af0899ed957364e1

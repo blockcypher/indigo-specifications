@@ -1,0 +1,159 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents the current state of a particular block from a Blockchain. 
+  It contains an array of Transactions.
+  A Block is uniquely identified by a hash.
+type: object
+required:
+  - hash
+  - height
+  - time
+  - n_tx
+  - previous_hash
+properties:
+  hash:
+    description: >-
+      The block hash.
+    type: string
+    example: 00000000000000000000d9a5f38fe5625d0d9f0a2400887b785ad22a84c12f55
+  height:
+    description: >-
+      The block height.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 16049481
+  previous_hash:
+    description: >-
+      The previous block hash.
+    type: string
+    example: 0x10cd97031a8146ba2f354ecbbc690e5655ff83c944afbd55ba681c09a0d24bcd
+  previous_hash_url:
+    description: >-
+      The previous block hash url.
+    type: string
+    example: https://api.blockcypher.com/v2/eth/mainnet/block/0x1bee0a16fdef849b5d401180377050d69344ae0ff87b7d6acea54c8d0c4be60b
+  total:
+    description: >-
+      The total number of base units transacted in this block.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 3449468188401
+  fees:
+    description: >-
+      The total number of fees in base unit collected by the miner of the block.
+    type: integer
+    format: uint64
+    minimum: 0
+    example: 632416150514778500
+  gas_used:
+    description: >-
+      The total gas used in the block.
+    type: integer
+    format: uint64
+    minimum: 0
+    example: 30028774
+  gas_limit:
+    description: >-
+      Total gas limit provided by all transactions in the block.
+    type: integer
+    format: uint64
+    example: 30028980
+  base_fee_per_gas:
+    description: >-
+      For Ethereum, this represents the minimum gasUsed multiplier required for a tx to be included in a block.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 14316524
+  size:
+    description: >-
+      Size of the block in bytes.
+    type: integer
+    format: uint64
+    example: 1426312
+  virtual_size:
+    description: >-
+      For segwit-enabled chain, size of the block in virtual bytes.
+    type: integer
+    format: uint64
+    example: 999011
+  version:
+    description: >-
+      Block version
+    type: integer
+    format: uint32
+    example: 536870912
+  time:
+    description: >-
+      Recorded time at which the block was built.
+    type: string
+    format: date-time
+    example: 2022-02-18T16:09:15Z
+  miner:
+    description: >-
+      The miner of the block.
+    type: string
+    example: 0xab3b229eb4bcff881275e7ea2f0fd24eeac8c83a
+  reward:
+    description: >-
+      The reward for this block in base unit.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 3449468188401
+  difficulty:
+    description: >-
+      The block difficulty.
+    type: string
+    example: 13,087,356,693,705,863
+  total_difficulty:
+    description: >-
+      The accumulated sum of difficulty of all blocks in the chain until this block
+    type: string
+    example: 42,789,791,209,178,922,823,960
+  nonce:
+    description: >-
+      The random number used by the miner to generate this block.
+    type: integer
+    format: uint64
+    example: 334718691
+  n_tx:
+    description: >-
+      Number of transactions in this block.
+    type: integer
+    format: uint64
+    example: 1862
+  merkle_root:
+    description: >-
+      The Merkle root of this block
+    type: string
+    example: 95196a8b1e50b0548c0c5ba68de333360523edca09afd4ee211c297715ab7f9e
+  txids:
+    description: >-
+      An array of transaction hashes in this block. By default, only 20 are included.
+    type: array
+    items:
+      description: >-
+        The hash of the transaction
+      type: string
+      example: 6214ffb81dd6b77989525867c3e8473b733dcd0fdd2a28fbdd3fd31ab4be059a
+    example:
+      [
+        0c2d6141804f8b3d0ae96521e4e323e1dbe20ca4f5ea53f8592df95d5b8de554,
+        2ead9b27e18c4a1d1a16300cc47ec51e7fae282f1edb41a0510a3346b4dc6f36,
+      ]

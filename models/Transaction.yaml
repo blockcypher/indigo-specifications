@@ -1,0 +1,216 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents the current state of a particular transaction from either a Block within a Blockchain, 
+  or an unconfirmed transaction that has yet to be included in a Block.
+type: object
+required:
+  - hash
+properties:
+  hash:
+    description: >-
+      The hash of the transaction.
+    type: string
+    example: f854aebae95150b379cc1187d848d58225f3c4157fe992bcd166f58bd5063449
+  block_height:
+    description: >-
+      Height of the block that contains this transaction
+    type: string
+    format: bigint
+    minimum: 0
+    example: 293000
+  block_hash:
+    description: >-
+      Hash of the block that contains this transaction.
+    type: string
+    example: 000000000000000000039786b5b1507ce569585ecee150c6a9fe8343ce672eab
+  block_index:
+    description: >-
+      Canonical, zero-indexed location of this transaction in a block.
+    type: integer
+    format: uint64
+    example: 1
+  total:
+    # I think the anything that can be above uint64 should be string
+    description: >-
+      The total number of base units exchanged in this transaction.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 703200221545
+  size:
+    description: >-
+      Size of the transaction in bytes.
+    type: integer
+    format: uint64
+    minimum: 0
+    example: 636
+  fees:
+    description: >-
+      The total number of fees---in base units--- in this transaction.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 0
+  virtual_size:
+    description: >-
+      For segwit-enabled chain, size of the transaction in virtual bytes.
+    type: integer
+    format: uint64
+    example: 636
+  gas_price:
+    description: >-
+      The price of gas---in base units---in this transaction.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 20000000000
+  gas_used:
+    description: >-
+      The amount of gas used by this transaction.
+    type: integer
+    format: uint64
+    example: 79779
+  gas_limit:
+    description: >-
+      The gas limit
+    type: integer
+    format: uint64
+    example: 500000
+  base_fee_per_gas:
+    description: >-
+      Base Fee Per Gas refers to the network base fee at the time of the block.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 44882847205
+  max_fee_per_gas:
+    description: >-
+      Max Fee Per Gas refer to the max amount a user is willing to pay for their transaction.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 83490998906
+  max_priority_fee_per_gas:
+    description: >-
+      Max Priority Fee Per Gas refer to the max amount a user is willing to give to the miner.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 1000000000
+  contract_creation:
+    description: >-
+      Whether this transaction was used to create a contract and contract account.
+    type: boolean
+    example: false
+  execution_error:
+    description: >-
+      Whether there was an execution error processing this transaction.
+    type: string
+    example: out of gas
+  preference:
+    description: >-
+      The likelihood that this transaction will make it to the next block; reflects the preference level miners have to include this transaction.
+    type: string
+    enum:
+      - available
+      - pending
+      - sold
+    example: high
+  version:
+    description: >-
+      Version number of the transaction, typically 1 for Bitcoin transactions.
+    type: integer
+    format: uint32
+    example: 1
+  type:
+    description: >-
+      Type of the transaction
+    type: integer
+    format: uint32
+    example: 2
+  lock_time:
+    description: >-
+      Time when transaction can be valid. Can be interpreted in two ways: if less than 500 million, refers to block height. If more, refers to Unix epoch time.
+    type: integer
+    format: uint64
+    example: 0
+  double_spend:
+    description: >-
+      Whether this transaction is an attempted double spend.
+    type: boolean
+    example: false
+  vin_sz:
+    description: >-
+      Total number of inputs in the transaction.
+    type: integer
+    format: uint32
+    example: 4
+  vout_sz:
+    description: >-
+      Total number of outputs in the transaction.
+    type: integer
+    format: uint32
+    example: 1
+  confirmations:
+    description: >-
+      Number of subsequent blocks, including the block the transaction is in. Unconfirmed transactions have 0 confirmations.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 1
+  inputs:
+    description: >-
+      Inputs array, limited to 20 by default.
+    type: array
+    items:
+      $ref: "Input.yaml"
+  outputs:
+    description: >-
+      Outputs array, limited to 20 by default.
+    type: array
+    items:
+      $ref: "Output.yaml"
+  opt_in_rbf:
+    description: >-
+      Returns true if this transaction has opted in to Replace-By-Fee (RBF), either true or not present.
+    type: boolean
+    example: false
+  confidence:
+    description: >-
+      The percentage chance this transaction will not be double-spent against, if unconfirmed.
+    type: number
+    format: float
+    example: 0.21783851328843576
+  double_of:
+    description: >-
+      If this transaction is a double-spend (i.e. double_spend == true) then this is the hash of the transaction it's double-spending.
+    type: string
+    example: 5fa6b133baf33e47748683595848fbb5cb899f711aacc082bfa605bf2e3a1298
+  hex:
+    description: >-
+      Hex-encoded bytes of the transaction, as sent over the network.
+    type: string
+    example: 0100000000010101420f5330178b05110d26a682b62dbcf831d6d6241f962fab8d7d8c6ca51b300400000000ffffffff0250160800000000001976a9147edc6f0f56fdd6eae412463cf2aad9554efe9d6988acec8f0a0000000000220020701a8d401c84fb13e6baf169d59684e17abd9fa216c8cc5b9fc63d622ff8c58d0400473044022062df45caa1118ae9ca5af580d31db9229934bce53a64845ce313067abae2cb2702205c790458997113040498a9072f347d6efcf2fa4dcd651cc789de13360100f8030147304402201ef38b2798e03f5e6af08ab4004d5883152e0e805707dd262633ffcb76f7d07202207bb61aa38220cbd2ee776040756c67f488c35e8651afe9b3210c2bb5052b0a35016952210375e00eb72e29da82b89367947f29ef34afb75e8654f6ea368e0acdfd92976b7c2103a1b26313f430c4b15bb1fdce663207659d8cac749a0e53d70eff01874496feff2103c96d495bfdd5ba4145e3e046fee45e84a8a48ad05bd8dbb395c011a32cf9f88053ae00000000
+  next_inputs_url:
+    description: >-
+      If there are more transaction inputs that couldn't fit into the TXInput array, this is the BlockCypher URL to query the next set of inputs.
+    type: string
+    example: https://api.blockcypher.com/v2/btc/main/txs/3025b77340bd4b2fd3e456eeed0fb8958420b3de42ece8aa196a9fd4d84b43ed?instart=20&outstart=0&limit=20
+  next_outputs_url:
+    description: >-
+      If there are more transaction outputs that couldn't fit into the TXOutput array, this is the BlockCypher URL to query the next set of outputs.
+    type: string
+    example: https://api.blockcypher.com/v2/btc/main/txs/3025b77340bd4b2fd3e456eeed0fb8958420b3de42ece8aa196a9fd4d84b43ed?instart=0&outstart=20&limit=20

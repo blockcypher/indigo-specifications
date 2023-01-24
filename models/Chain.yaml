@@ -1,0 +1,99 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents the current state of a particular blockchain.
+type: object
+required:
+  - name
+  - height
+  - time
+  - hash
+  - previous_hash
+  - peer_count
+  - unconfirmed_count
+properties:
+  name:
+    description: >-
+      Name of the chain. Symbol and network.
+    type: string
+    example: ETH.mainnet
+  height:
+    description: >-
+      The block height
+    type: string
+    format: bigint
+    minimum: 0
+    example: 16049481
+  time:
+    description: >-
+      Recorded time at which the latest block was built.
+    type: string
+    format: date-time
+    example: 2022-02-18T16:09:15Z
+  hash:
+    description: >-
+      The block hash.
+    type: string
+    example: 0x10cd97031a8146ba2f354ecbbc690e5655ff83c944afbd55ba681c09a0d24bcd
+  hash_url:
+    description: >-
+      The URL to query for more information on the latest confirmed block; returns a Block.
+    type: string
+    example: https://api.blockcypher.com/v2/eth/main/blocks/0x10cd97031a8146ba2f354ecbbc690e5655ff83c944afbd55ba681c09a0d24bcd
+  previous_hash:
+    description: >-
+      The previous block hash.
+    type: string
+    example: 00000000000000000003432cc88fc0fef9e8f4111d5c8e29d2fee46929b6d891
+  previous_hash_url:
+    description: >-
+      The URL to query for more information on the second-to-latest confirmed block; returns a Block.
+    type: string
+    example: https://api.blockcypher.com/v2/eth/mainnet/blocks/0x1bee0a16fdef849b5d401180377050d69344ae0ff87b7d6acea54c8d0c4be60b
+  peer_count:
+    description: >-
+      The number of peers our node is connected to.
+    type: integer
+    format: uint64
+    example: 64
+  unconfirmed_count:
+    description: >-
+      The number of unconfirmed transactions in the memory pool.
+    type: integer
+    format: uint64
+    example: 800
+  high_fee:
+    description: >-
+      A generic high fee field. Can be either base units per byte (e.g. satoshis per byte) or priority fee for Ethereum.
+    type: integer
+    format: uint64
+    example: 46086
+  medium_fee:
+    description: >-
+      A generic medium fee field. Can be either base units per byte (e.g. satoshis per byte) or priority fee for Ethereum.
+    type: integer
+    format: uint64
+    example: 29422
+  low_fee:
+    description: >-
+      A generic small fee field. Can be either base units per byte (e.g. satoshis per byte) or priority fee for Ethereum.
+    type: integer
+    format: uint64
+    example: 12045
+  base_fee:
+    description: >-
+      Represents the minimum amount of gas that must be used for a transaction to be included in a block.
+    type: string
+    example: 32685384611

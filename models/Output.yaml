@@ -1,0 +1,68 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents an output created by a transaction.
+type: object
+required:
+  - value
+properties:
+  value:
+    description: >-
+      Value in this transaction output, in base units.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 70320221545
+  script:
+    description: >-
+      Raw hexadecimal encoding of the encumbrance script for this output.
+    type: string
+    example: 76a914e6aad9d712c419ea8febf009a3f3bfdd8d222fac88ac
+  addresses:
+    description: >-
+      Addresses that correspond to this output; typically this will only have a single address, and you can think of this output as having "sent" value to the address contained herein.
+    type: array
+    items:
+      description: >-
+        An address
+      type: string
+      example: 1N2f642sbgCMbNtXFajz9XDACDFnFzdXzV
+    example: [1N2f642sbgCMbNtXFajz9XDACDFnFzdXzV]
+  script_type:
+    description: >-
+      The type of encumbrance script used for this output.
+    type: string
+    example: pay-to-pubkey-hash
+  transaction_events:
+    description: >-
+      Events triggered by this transaction.
+    type: array
+    items:
+      $ref: "TransactionEvent.yaml"
+  spent_by:
+    description: >-
+      The transaction hash that spent this output. Only returned for outputs that have been spent. The spending transaction may be unconfirmed.
+    type: string
+    example: 35832d6c70b98b54e9a53ab2d51176eb19ad11bc4505d6bb1ea6c51a68cb92ee
+  data_hex:
+    description: >-
+      A hex-encoded representation of an OP_RETURN data output, without any other script instructions. Only returned for outputs whose script_type is null-data.
+    type: string
+    example: 636861726c6579206c6f766573206865696469
+  data_string:
+    description: >-
+      An ASCII representation of an OP_RETURN data output, without any other script instructions. Only returned for outputs whose script_type is null-data and if its data falls into the visible ASCII range.
+    type: string
+    example: charley loves heidi

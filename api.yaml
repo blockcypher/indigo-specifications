@@ -1,0 +1,445 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+openapi: 3.0.0
+info:
+  description: >-
+    One API to Rule Them All
+  version: 0.0.1
+  title: Indigo
+tags:
+  - name: chain
+    description: All the basic chain endpoints
+  - name: transaction
+    description: All the transaction endpoints
+  - name: address
+    description: All the address endpoints
+servers:
+  - url: http://{ip}:{port}/v2/{symbol}/{network}
+    variables:
+      ip:
+        default: localhost
+        description: ip of the server
+      port:
+        enum:
+          - "80"
+          - "8080"
+        default: "8080"
+        description: ip of the server
+      symbol:
+        default: eth
+        description: currency symbol
+      network:
+        default: dev
+        description: network
+paths:
+  "/":
+    get:
+      tags:
+        - chain
+      summary: Get the current state of the blockchain
+      operationId: getChain
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chain"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/block/{hash}":
+    get:
+      tags:
+        - chain
+      summary: Get a block by hash
+      operationId: getBlockByHash
+      parameters:
+        - name: hash
+          in: path
+          description: Hash of the block to return
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include a maximum of limit transactions hashes in the block. Maximum value allowed is 500 (default 20).
+        - name: txStart
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include transaction hashes after txstart in the block.
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Block"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/block/{height}":
+    get:
+      tags:
+        - chain
+      summary: Get a block by height
+      operationId: getBlockByHeight
+      parameters:
+        - name: height
+          in: path
+          description: Height of the block to return
+          required: true
+          schema:
+            type: string
+            minimum: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include a maximum of limit transactions hashes in the block. Maximum value allowed is 500 (default 20).
+        - name: txStart
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include transaction hashes after txstart in the block.
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Block"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/transaction/{hash}":
+    get:
+      tags:
+        - transaction
+      summary: Get a transaction by hash
+      operationId: getTransactionByHash
+      parameters:
+        - name: hash
+          in: path
+          description: Hash of the transaction to return
+          required: true
+          schema:
+            type: string
+        - name: includeHex
+          in: query
+          schema:
+            type: boolean
+          description: If true, includes hex-encoded raw transaction; false by default.
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/transaction/new":
+    post:
+      tags:
+        - transaction
+      summary: Create a new transaction
+      operationId: postNewTransaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransactionPayload"
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionSkeleton"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/transaction/send":
+    post:
+      tags:
+        - transaction
+      summary: Send a newly API-created transaction
+      operationId: postSendTransaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransactionSkeleton"
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "models/Transaction.yaml"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/transaction/broadcast":
+    post:
+      tags:
+        - transaction
+      summary: Broadcast a raw transaction
+      operationId: postBroadcastTransaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RawTransactionPayload"
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/transaction/decode":
+    post:
+      tags:
+        - transaction
+      summary: Decode a raw transaction
+      operationId: postDecodeTransaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RawTransactionPayload"
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/address/{address}":
+    get:
+      tags:
+        - address
+      summary: Get an address information
+      operationId: getAddress
+      parameters:
+        - name: address
+          in: path
+          description: String representing the public address you're interested in querying
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: The numbers of transactions to return (default 50)
+        - name: before
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include transactions below before height in the blockchain
+        - name: after
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include transactions above after height in the blockchain
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "models/Address.yaml"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/address/{address}/balance":
+    get:
+      tags:
+        - address
+      summary: Get an address balance information
+      operationId: getAddressBalance
+      parameters:
+        - name: address
+          in: path
+          description: String representing the public address you're interested in querying
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Address"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/address/{address}/contract/{contract}":
+    get:
+      tags:
+        - address
+      summary: Get an address information regarding a specific contract
+      operationId: getAddressContract
+      parameters:
+        - name: address
+          in: path
+          description: String representing the public address you're interested in querying
+          required: true
+          schema:
+            type: string
+        - name: contract
+          in: path
+          description: String representing the contract address you're interested in querying
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: The numbers of transactions to return (default 50)
+        - name: before
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include transactions below before height in the blockchain
+        - name: after
+          in: query
+          schema:
+            type: integer
+          description: Filters response to only include transactions above after height in the blockchain
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddressContract"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/address":
+    post:
+      tags:
+        - address
+      summary: Generate a new address
+      operationId: postAddress
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddressKeychain"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+externalDocs:
+  description: Find out more about BlockCypher
+  url: "https://blockcypher.com"
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: query
+  schemas:
+    # Models
+    Address:
+      $ref: "models/Address.yaml"
+    AddressContract:
+      $ref: "models/AddressContract.yaml"
+    AddressKeychain:
+      $ref: "models/AddressKeychain.yaml"
+    AddressTransactionSummary:
+      $ref: "models/AddressTransactionSummary.yaml"
+    Chain:
+      $ref: "models/Chain.yaml"
+    Block:
+      $ref: "models/Block.yaml"
+    Transaction:
+      $ref: "models/Transaction.yaml"
+    Input:
+      $ref: "models/Input.yaml"
+    Output:
+      $ref: "models/Output.yaml"
+    TransactionEvent:
+      $ref: "models/TransactionEvent.yaml"
+    TransactionPayload:
+      $ref: "models/TransactionPayload.yaml"
+    TransactionSkeleton:
+      $ref: "models/TransactionSkeleton.yaml"
+    RawTransactionPayload:
+      $ref: "models/RawTransactionPayload.yaml"
+    # Miscellaneous
+    Error:
+      $ref: "models/Error.yaml"
+
+security:
+  - api_key: []

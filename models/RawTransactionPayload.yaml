@@ -1,0 +1,25 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents a raw transaction payload. Mainly used to broadcast a raw signed transaction on the network.
+type: object
+required:
+  - tx
+properties:
+  tx:
+    description: >-
+      Hex-encoded raw transaction.
+    type: string
+    example: b87602f8730101843b9aca00850430e234008252089463c3f8465fd234fde9f1ebbb68cdf8224de62e58880206b239f935000080c001a041497762ad9b153c91efcc1d803ebde1497991c2705fd868f49c2a776f0e2f5fa008f346d834bc959339c8b8becd9aa2f2020f4d99f1b147569f0f2c0dcab69b0e
