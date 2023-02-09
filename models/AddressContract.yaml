@@ -54,3 +54,9 @@ properties:
     type: array
     items:
       $ref: "AddressTransactionSummary.yaml"
+  unconfirmed_txs:
+    description: >-
+      All unconfirmed transaction summaries for this address.
+    type: array
+    items:
+      $ref: "AddressTransactionSummary.yaml"
