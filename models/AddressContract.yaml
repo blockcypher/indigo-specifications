@@ -32,7 +32,19 @@ properties:
     example: 0x00192Fb10dF37c9FB26829eb2CC623cd1BF599E8
   n_tx:
     description: >-
-      Number of confirmed transactions on this address. Only transactions that have made it into a block (confirmations > 0) are counted.
+      Number of confirmed contract transactions on this address. Only transactions that have made it into a block (confirmations > 0) are counted.
+    type: integer
+    format: uint64
+    example: 704
+  unconfirmed_n_tx:
+    description: >-
+      Number of unconfirmed contract transactions for this address. Only unconfirmed transactions (confirmations == 0) are counted.
+    type: integer
+    format: uint64
+    example: 0
+  final_n_tx:
+    description: >-
+      Final number of contract transactions, including confirmed and unconfirmed transactions, for this address.
     type: integer
     format: uint64
     example: 704
