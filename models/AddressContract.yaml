@@ -19,6 +19,8 @@ required:
   - address
   - contract_address
   - n_tx
+  - unconfirmed_n_tx
+  - final_n_tx
 properties:
   address:
     description: >-
