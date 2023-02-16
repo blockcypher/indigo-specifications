@@ -16,22 +16,22 @@ description: >-
   represents the state of an address/account in regards to a specific contract.
 type: object
 required:
-  - address
   - contract_address
+  - address
   - n_tx
   - unconfirmed_n_tx
   - final_n_tx
 properties:
-  address:
-    description: >-
-      The address.
-    type: string
-    example: 0x738d145fAAbb1E00Cf5A017588A9C0F998318012
   contract_address:
     description: >-
       The contract address.
     type: string
     example: 0x00192Fb10dF37c9FB26829eb2CC623cd1BF599E8
+  address:
+    description: >-
+      The address.
+    type: string
+    example: 0x738d145fAAbb1E00Cf5A017588A9C0F998318012
   n_tx:
     description: >-
       Number of confirmed contract transactions on this address. Only transactions that have made it into a block (confirmations > 0) are counted.
