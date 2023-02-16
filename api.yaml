@@ -28,6 +28,8 @@ tags:
     description: All the transaction endpoints
   - name: address
     description: All the address endpoints
+  - name: contract
+    description: All the contract endpoints
 servers:
   - url: http://{ip}:{port}/v2/{symbol}/{network}
     variables:
@@ -337,22 +339,72 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/address/{address}/contract/{contract}":
-    get:
+  "/address":
+    post:
       tags:
         - address
-      summary: Get an address information regarding a specific contract
-      operationId: getAddressContract
+      summary: Generate a new address
+      operationId: postAddress
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddressKeychain"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/contract/{contract}":
+    get:
+      tags:
+        - contract
+      summary: Get information regarding a specific contract
+      operationId: getContract
       parameters:
-        - name: address
-          in: path
-          description: String representing the public address you're interested in querying
-          required: true
-          schema:
-            type: string
         - name: contract
           in: path
           description: String representing the contract address you're interested in querying
+          required: true
+          schema:
+            type: string
+        - name: includeCode
+          in: query
+          schema:
+            type: boolean
+          description: If true, includes the hex-encoded code of the contract; false by default.
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contract"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/contract/{contract}/address/{address}":
+    get:
+      tags:
+        - contract
+      summary: Get an address information regarding a specific contract
+      operationId: getContractAddress
+      parameters:
+        - name: contract
+          in: path
+          description: String representing the contract address you're interested in querying
+          required: true
+          schema:
+            type: string
+        - name: address
+          in: path
+          description: String representing the public address you're interested in querying
           required: true
           schema:
             type: string
@@ -377,26 +429,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AddressContract"
-        "500":
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  "/address":
-    post:
-      tags:
-        - address
-      summary: Generate a new address
-      operationId: postAddress
-      responses:
-        "200":
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AddressKeychain"
+                $ref: "#/components/schemas/ContractAddress"
         "500":
           description: unexpected error
           content:
@@ -416,14 +449,16 @@ components:
     # Models
     Address:
       $ref: "models/Address.yaml"
-    AddressContract:
-      $ref: "models/AddressContract.yaml"
     AddressKeychain:
       $ref: "models/AddressKeychain.yaml"
     AddressTransactionSummary:
       $ref: "models/AddressTransactionSummary.yaml"
     Chain:
       $ref: "models/Chain.yaml"
+    Contract:
+      $ref: "models/Contract.yaml"
+    ContractAddress:
+      $ref: "models/ContractAddress.yaml"
     Block:
       $ref: "models/Block.yaml"
     Transaction:
