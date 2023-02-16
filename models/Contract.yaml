@@ -1,0 +1,66 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents various data about a specific contract.
+type: object
+required:
+  - contract_address
+  - creator
+  - creator_tx_hash
+properties:
+  contract_address:
+    description: >-
+      The contract address.
+    type: string
+    example: 0xdAC17F958D2ee523a2206206994597C13D831ec7
+  code:
+    description: >-
+      The contract code.
+    type: string
+    example: 606060405260008060146101000a81548160ff0219169083151....
+  creator:
+    description: >-
+      The contract creator address.
+    type: string
+    example: 0x36928500Bc1dCd7af6a2B4008875CC336b927D57
+  creator_tx_hash:
+    description: >-
+      The transaction hash that created the contract.
+    type: string
+    example: 0x2f1c5c2b44f771e942a8506148e256f94f1a464babc938ae0690c6e34cd79190
+  name:
+    description: >-
+      The name of the contract if any.
+    type: string
+    example: Tether USD
+  symbol:
+    description: >-
+      The symbol of the token if any.
+    type: string
+    example: USDT
+  total_supply:
+    description: >-
+      The total supply of the token if any.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 30284517903064882
+  decimals:
+    description: >-
+      The numbers of decimals of the token if any.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 6
