@@ -1,0 +1,24 @@
+# https://github.com/coinbase/salus/blob/master/docs/configuration.md
+
+# Used in the report to identify the project being scanned.
+project_name: indigo-sdk
+
+# Defines where to send Salus reports and in what format.
+reports:
+  - uri: file://salus-report.txt
+    format: txt
+
+# All scanners to execute, or the String value "all"/"none"
+active_scanners:
+  - Gosec
+  - PatternSearch
+  - RepoNotEmpty
+  - Semgrep
+  - GoPackageScanner
+  - ReportGoDep
+  - Trufflehog
+
+scanner_configs:
+  Gosec:
+    exclude:
+      - G107
