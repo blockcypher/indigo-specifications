@@ -30,6 +30,8 @@ tags:
     description: All the address endpoints
   - name: contract
     description: All the contract endpoints
+  - name: event
+    description: All the event endpoints
 servers:
   - url: http://{ip}:{port}/v2/{symbol}/{network}
     variables:
@@ -436,6 +438,100 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  "/event/new":
+    post:
+      tags:
+        - event
+      summary: Create a new event
+      operationId: postNewEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Event"
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/event/delete/{id}":
+    delete:
+      tags:
+        - event
+      summary: Delete a specific event by ID
+      operationId: deleteEventByID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the event to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/event/{id}":
+    get:
+      tags:
+        - event
+      summary: Get a specific event by ID
+      operationId: getEventByID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the event to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/event/list":
+    get:
+      tags:
+        - event
+      summary: Get a list of event associated with the specific token
+      operationId: getEventList
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 externalDocs:
   description: Find out more about BlockCypher
   url: "https://blockcypher.com"
@@ -453,20 +549,22 @@ components:
       $ref: "models/AddressKeychain.yaml"
     AddressTransactionSummary:
       $ref: "models/AddressTransactionSummary.yaml"
+    Block:
+      $ref: "models/Block.yaml"
     Chain:
       $ref: "models/Chain.yaml"
     Contract:
       $ref: "models/Contract.yaml"
     ContractAddress:
       $ref: "models/ContractAddress.yaml"
-    Block:
-      $ref: "models/Block.yaml"
-    Transaction:
-      $ref: "models/Transaction.yaml"
+    Event:
+      $ref: "models/Event.yaml"
     Input:
       $ref: "models/Input.yaml"
     Output:
       $ref: "models/Output.yaml"
+    Transaction:
+      $ref: "models/Transaction.yaml"
     TransactionEvent:
       $ref: "models/TransactionEvent.yaml"
     TransactionPayload:
