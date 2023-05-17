@@ -22,7 +22,7 @@ required:
 properties:
   id:
     description: >-
-      Identifier of the event; generated when a new request is created.
+      Identifier of the event; generated when a new event is created.
     type: string
     example: 399d0923-e920-48ee-8928-2051cbfbc369
   event:
