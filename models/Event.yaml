@@ -1,0 +1,56 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents a webHooks notification request.
+type: object
+required:
+  - id
+  - event
+  - url
+properties:
+  id:
+    description: >-
+      Identifier of the event; generated when a new request is created.
+    type: string
+    example: 399d0923-e920-48ee-8928-2051cbfbc369
+  event:
+    description: >-
+      Type of event; can be transaction or block.
+    type: string
+    example: transaction
+  address:
+    description: >-
+      For transaction event, only transactions associated with the given address will be sent.
+    type: string
+    example: 15qx9ug952GWGTNn7Uiv6vode4RcGrRemh
+  confirmations:
+    description: >-
+      For transaction, used to set the number of confirmations desired for which to receive an update.
+      An updated transaction will be sent for every confirmation up to this amount. If set to 0, only 
+      the unconfirmed transaction will be sent
+    type: integer
+    format: uint8
+    example: 5
+  url:
+    description: >-
+      Callback URL for this event's webHook.
+    type: string
+    example: https://my.domain.com/callbacks/transaction
+  callback_errors:
+    description: >-
+      Number of errors when attempting to POST to callback URL.
+    type: integer
+    format: uint8
+    example: 0
