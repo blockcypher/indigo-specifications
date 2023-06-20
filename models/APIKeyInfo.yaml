@@ -35,21 +35,18 @@ properties:
         type: integer
         format: uint64
         example: 100
-        required: true
       api/second:
         description: >-
           The number of API calls you can make per second.
         type: integer
         format: uint64
         example: 5
-        required: true
       hooks:
         description: >-
           The number of hooks you can have simultaneously.
         type: integer
         format: uint64
         example: 10
-        required: true
   hits:
     description: >-
       The number of hits associated with your API key for the current hour.
@@ -61,14 +58,12 @@ properties:
         type: integer
         format: uint64
         example: 20
-        required: true
       hooks:
         description: >-
           The number of hooks you have currently.
         type: integer
         format: uint64
         example: 10
-        required: true
   hits_history:
     description: >-
       The hits history associated with your API key (last 48 hours).
@@ -81,18 +76,15 @@ properties:
           type: string
           format: date-time
           example: 2015-05-18T00:00:00.000000Z
-          required: true
         api/hour:
           description: >-
             The number of API calls you made at that time.
           type: integer
           format: uint64
           example: 100
-          required: true
         hooks:
           description: >-
             The number of hooks you had at that time.
           type: integer
           format: uint64
           example: 10
-          required: true
