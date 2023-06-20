@@ -549,6 +549,8 @@ components:
       $ref: "models/AddressKeychain.yaml"
     AddressTransactionSummary:
       $ref: "models/AddressTransactionSummary.yaml"
+    APIKeyInfo: 
+      $ref: "models/APIKeyInfo.yaml"
     Block:
       $ref: "models/Block.yaml"
     Chain:
@@ -561,8 +563,6 @@ components:
       $ref: "models/Event.yaml"
     Input:
       $ref: "models/Input.yaml"
-    Limits: 
-      $ref: "models/Limits.yaml"
     Output:
       $ref: "models/Output.yaml"
     Transaction:
