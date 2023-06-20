@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   description: >-
     One API to Rule Them All
@@ -20,7 +20,7 @@ info:
   title: Indigo
   license:
     name: Apache 2.0
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    identifier: "Apache-2.0"
 tags:
   - name: chain
     description: All the basic chain endpoints
@@ -537,9 +537,9 @@ externalDocs:
   url: "https://blockcypher.com"
 components:
   securitySchemes:
-    api_key:
+    apiKey:
       type: apiKey
-      name: api_key
+      name: api key
       in: query
   schemas:
     # Models
@@ -561,6 +561,8 @@ components:
       $ref: "models/Event.yaml"
     Input:
       $ref: "models/Input.yaml"
+    Limits: 
+      $ref: "models/Limits.yaml"
     Output:
       $ref: "models/Output.yaml"
     Transaction:

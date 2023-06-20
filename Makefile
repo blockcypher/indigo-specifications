@@ -14,7 +14,7 @@ go-deps:
 deps: node-deps go-deps
 
 gen:
-	openapi-generator-cli generate -g go -i api.yaml -o build
+	openapi-generator-cli generate -i api.yaml -g go -o build
 
 check-valid:
 	openapi-generator-cli validate -i api.yaml

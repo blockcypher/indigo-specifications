@@ -1,0 +1,90 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents the limits associated with a specific api key.
+type: object
+required:
+  - api_key
+  - limits
+properties:
+  api_key:
+    description: >-
+      Your API key. A UUID without hyphens.
+    type: string
+    example: a34054ae7b7f4edeb049-5035cfe8d749
+  limits:
+    description: >-
+      The limits associated with your API key.
+    type: object
+    properties:
+      api/hour:
+        description: >-
+          The number of API calls you can make per hour.
+        type: integer
+        format: uint64
+        example: 100
+      api/second:
+        description: >-
+          The number of API calls you can make per second.
+        type: integer
+        format: uint64
+        example: 5
+      hooks:
+        description: >-
+          The number of hooks you can have simultaneously.
+        type: integer
+        format: uint64
+        example: 10
+  hits:
+    description: >-
+      The number of hits associated with your API key for the current hour.
+    type: object
+    properties:
+      api/hour:
+        description: >-
+          The number of API calls you did this hour.
+        type: integer
+        format: uint64
+        example: 20
+      hooks:
+        description: >-
+          The number of hooks you have currently.
+        type: integer
+        format: uint64
+        example: 10
+  hits_history:
+    description: >-
+      The hits history associated with your API key (last 48 hours).
+    type: array
+    items:
+      properties:
+        time:
+          description: >-
+            The time at which the hits were recorded.
+          type: string
+          format: date-time
+          example: 2015-05-18T00:00:00.000000Z
+        api/hour:
+          description: >-
+            The number of API calls you made at that time.
+          type: integer
+          format: uint64
+          example: 100
+        hooks:
+          description: >-
+            The number of hooks you had at that time.
+          type: integer
+          format: uint64
+          example: 10
