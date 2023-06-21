@@ -549,8 +549,12 @@ components:
       $ref: "models/AddressKeychain.yaml"
     AddressTransactionSummary:
       $ref: "models/AddressTransactionSummary.yaml"
+    # these two models cannot be represented by a path in this spec
+    # but we need them for code generation
     APIKeyInfo: 
       $ref: "models/APIKeyInfo.yaml"
+    APIKeyCount:
+      $ref: "models/APIKeyCount.yaml"
     Block:
       $ref: "models/Block.yaml"
     Chain:

@@ -13,28 +13,31 @@
 # limitations under the License.
 
 description: >-
-  represents the information associated with a specific api key.
+  represents either the limits or current usage of an API key.
 type: object
-required:
-  - api_key
-  - limits
 properties:
-  api_key:
+  time:
     description: >-
-      Your API key. A UUID without hyphens.
+      The time at which the hits were recorded.
     type: string
-    example: a34054ae7b7f4edeb049-5035cfe8d749
-  limits:
+    format: date-time
+    example: 2015-05-18T00:00:00.000000Z
+  api/second:
     description: >-
-      The limits associated with your API key.
-    $ref: "APIKeyCount.yaml"
-  hits:
+      The number of API calls per second.
+    type: integer
+    format: uint64
+    example: 5
+  api/hour:
     description: >-
-      The number of hits associated with your API key for the current hour.
-    $ref: "APIKeyCount.yaml"
-  hits_history:
+      The number of API calls per hour.
+    type: integer
+    format: uint64
+    example: 100
+  hooks:
     description: >-
-      The hits history associated with your API key (last 48 hours).
-    type: array
-    items:
-      $ref: "APIKeyCount.yaml"
+      The number of hooks.
+    type: integer
+    format: uint64
+    example: 10
+ 
