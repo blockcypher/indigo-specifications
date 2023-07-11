@@ -511,12 +511,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/event/list":
+  "/event":
     get:
       tags:
         - event
-      summary: Get a list of event associated with the specific token
-      operationId: getEventList
+      summary: Get all the events associated with token provided
+      operationId: getEvents
       responses:
         "200":
           description: Expected response to a valid request
