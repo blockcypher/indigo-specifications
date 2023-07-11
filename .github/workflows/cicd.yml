@@ -6,7 +6,7 @@ jobs:
     name: Check License
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
       - run: make go-deps
       - run: make check-license
   check-spelling:
@@ -14,7 +14,7 @@ jobs:
     name: Check Spelling
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
       - run: make go-deps
       - run: make spellcheck
   check-gen:
@@ -22,7 +22,7 @@ jobs:
     name: Check Gen
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
       - run: make node-deps
       - run: make check-gen
   check-valid:
@@ -30,7 +30,7 @@ jobs:
     name: Check Valid
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
       - run: make node-deps
       - run: make check-valid
   salus:
