@@ -27,6 +27,11 @@ properties:
     example: 399d0923-e920-48ee-8928-2051cbfbc369
   type:
     $ref: "EventType.yaml"
+  api_key:
+    description: >-
+      Your API key. A UUID without hyphens.
+    type: string
+    example: a34054ae7b7f4edeb049-5035cfe8d749
   address:
     description: >-
       For transaction and contract events, only transactions associated with the given address will be sent.
