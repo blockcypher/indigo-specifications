@@ -26,20 +26,22 @@ properties:
     type: string
     example: 399d0923-e920-48ee-8928-2051cbfbc369
   event:
-    description: >-
-      Type of event; can be transaction or block.
-    type: string
-    example: transaction
+    $ref: 'EventType.yaml'
   address:
     description: >-
-      For transaction event, only transactions associated with the given address will be sent.
+      For transaction and contract events, only transactions associated with the given address will be sent.
     type: string
     example: 15qx9ug952GWGTNn7Uiv6vode4RcGrRemh
+  contract_address:
+    description: >-
+      For contract event, only transactions associated with the given contract address will be sent.
+    type: string
+    example: 0xdac17f958d2ee523a2206206994597c13d831ec7
   confirmations:
     description: >-
       For transaction, used to set the number of confirmations desired for which to receive an update.
       An updated transaction will be sent for every confirmation up to this amount. If set to 0, only 
-      the unconfirmed transaction will be sent
+      the unconfirmed transaction will be sent.
     type: integer
     format: uint8
     example: 5

@@ -565,6 +565,8 @@ components:
       $ref: "models/ContractAddress.yaml"
     Event:
       $ref: "models/Event.yaml"
+    EventType:
+      $ref: "models/EventType.yaml"
     Input:
       $ref: "models/Input.yaml"
     Output:
