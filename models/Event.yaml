@@ -25,8 +25,8 @@ properties:
       Identifier of the event; generated when a new event is created.
     type: string
     example: 399d0923-e920-48ee-8928-2051cbfbc369
-  event:
-    $ref: 'EventType.yaml'
+  type:
+    $ref: "EventType.yaml"
   address:
     description: >-
       For transaction and contract events, only transactions associated with the given address will be sent.
