@@ -42,6 +42,12 @@ properties:
     type: integer
     format: uint64
     example: 1
+  addresses:
+    description: >-
+      Array of addresses involved in the transaction.
+    type: array
+    items:
+      type: string
   total:
     # I think the anything that can be above uint64 should be string
     description: >-
