@@ -46,7 +46,7 @@ properties:
     example: pay-to-script-hash
   addresses:
     description: >-
-      An array of public addresses associated with the output of the previous transaction
+      An array of addresses.
     type: array
     items:
       description: >-
