@@ -15,7 +15,7 @@
 # https://github.com/coinbase/salus/blob/master/docs/configuration.md
 
 # Used in the report to identify the project being scanned.
-project_name: indigo-sdk
+project_name: indigo-specifications
 
 # Defines where to send Salus reports and in what format.
 reports:
