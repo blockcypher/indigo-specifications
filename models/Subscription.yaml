@@ -13,7 +13,7 @@
 # limitations under the License.
 
 description: >-
-  represents a webHooks notification request.
+  represents a subscription request to a particular event on the blockchain.
 type: object
 required:
   - id
@@ -22,11 +22,11 @@ required:
 properties:
   id:
     description: >-
-      Identifier of the event; generated when a new event is created.
+      Identifier of the subscription; generated when a new subscription is created.
     type: string
     example: 399d0923-e920-48ee-8928-2051cbfbc369
   type:
-    $ref: "EventType.yaml"
+    $ref: "SubscriptionType.yaml"
   api_key:
     description: >-
       Your API key. A UUID without hyphens.
@@ -34,12 +34,12 @@ properties:
     example: a34054ae7b7f4edeb049-5035cfe8d749
   address:
     description: >-
-      For transaction and contract events, only transactions associated with the given address will be sent.
+      For transaction and contract subscriptions, only transactions associated with the given address will be sent.
     type: string
     example: 15qx9ug952GWGTNn7Uiv6vode4RcGrRemh
   contract_address:
     description: >-
-      For contract event, only transactions associated with the given contract address will be sent.
+      For contract subscription, only transactions associated with the given contract address will be sent.
     type: string
     example: 0xdac17f958d2ee523a2206206994597c13d831ec7
   confirmations:
@@ -52,7 +52,7 @@ properties:
     example: 5
   url:
     description: >-
-      Callback URL for this event's webHook.
+      Callback URL for this subscription's webHook.
     type: string
     example: https://my.domain.com/callbacks/transaction
   callback_errors:
