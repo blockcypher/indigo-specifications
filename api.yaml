@@ -30,8 +30,8 @@ tags:
     description: All the address endpoints
   - name: contract
     description: All the contract endpoints
-  - name: event
-    description: All the event endpoints
+  - name: subscription
+    description: All the subscription endpoints
 servers:
   - url: http://{ip}:{port}/v2/{symbol}/{network}
     variables:
@@ -438,41 +438,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/event/new":
+  "/subscription/new":
     post:
       tags:
-        - event
-      summary: Create a new event
-      operationId: postNewEvent
+        - subscription
+      summary: Create a new subscription
+      operationId: postNewSubscription
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Event"
+              $ref: "#/components/schemas/Subscription"
       responses:
         "200":
           description: Expected response to a valid request
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Event"
+                $ref: "#/components/schemas/Subscription"
         "500":
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/event/delete/{id}":
+  "/subscription/delete/{id}":
     delete:
       tags:
-        - event
-      summary: Delete a specific event by ID
-      operationId: deleteEventByID
+        - subscription
+      summary: Delete a specific subscription by ID
+      operationId: deleteSubscriptionByID
       parameters:
         - name: id
           in: path
-          description: ID of the event to return
+          description: ID of the subscription to return
           required: true
           schema:
             type: string
@@ -485,16 +485,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/event/{id}":
+  "/subscription/{id}":
     get:
       tags:
-        - event
-      summary: Get a specific event by ID
-      operationId: getEventByID
+        - subscription
+      summary: Get a specific subscription by ID
+      operationId: getSubscriptionByID
       parameters:
         - name: id
           in: path
-          description: ID of the event to return
+          description: ID of the subscription to return
           required: true
           schema:
             type: string
@@ -504,19 +504,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Event"
+                $ref: "#/components/schemas/Subscription"
         "500":
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/event":
+  "/subscription":
     get:
       tags:
-        - event
-      summary: Get all the events associated with token provided
-      operationId: getEvents
+        - subscription
+      summary: Get all the subscriptions associated with token provided
+      operationId: getSubscriptions
       responses:
         "200":
           description: Expected response to a valid request
@@ -525,7 +525,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Event"
+                  $ref: "#/components/schemas/Subscription"
         "500":
           description: unexpected error
           content:
@@ -563,10 +563,10 @@ components:
       $ref: "models/Contract.yaml"
     ContractAddress:
       $ref: "models/ContractAddress.yaml"
-    Event:
-      $ref: "models/Event.yaml"
-    EventType:
-      $ref: "models/EventType.yaml"
+    Subscription:
+      $ref: "models/Subscription.yaml"
+    SubscriptionType:
+      $ref: "models/SubscriptionType.yaml"
     Input:
       $ref: "models/Input.yaml"
     Output:
