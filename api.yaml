@@ -438,6 +438,70 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  "/contract/{contract}/read":
+    post:
+      tags:
+        - contract
+      summary: Interact with contract read only functions
+      operationId: readContract
+      parameters:
+        - name: contract
+          in: path
+          description: String representing the contract address you're interested in interacting with
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContractRead"
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContractRead"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  "/contract/{contract}/write":
+    post:
+      tags:
+        - contract
+      summary: Interact with contract write functions
+      operationId: writeContract
+      parameters:
+        - name: contract
+          in: path
+          description: String representing the contract address you're interested in interacting with
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContractWrite"
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContractWrite"
+        "500":
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   "/subscription/new":
     post:
       tags:
@@ -551,7 +615,7 @@ components:
       $ref: "models/AddressTransactionSummary.yaml"
     # these two models cannot be represented by a path in this spec
     # but we need them for code generation
-    APIKeyInfo: 
+    APIKeyInfo:
       $ref: "models/APIKeyInfo.yaml"
     APIKeyCount:
       $ref: "models/APIKeyCount.yaml"
@@ -563,6 +627,10 @@ components:
       $ref: "models/Contract.yaml"
     ContractAddress:
       $ref: "models/ContractAddress.yaml"
+    ContractRead:
+      $ref: "models/ContractRead.yaml"
+    ContractWrite:
+      $ref: "models/ContractWrite.yaml"
     Subscription:
       $ref: "models/Subscription.yaml"
     SubscriptionType:

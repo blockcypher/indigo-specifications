@@ -1,0 +1,41 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents a contract read query and response. It is mainly used to call
+  constant function, i.e. functions that do not consume any base units to be
+  executed.
+type: object
+required:
+  - function
+properties:
+  function:
+    description: >-
+      The contract function to call.
+    type: string
+    example: balanceOf
+  params:
+    description: >-
+      Array of parameters if required by the function.
+    type: array
+    items:
+      type: string
+      example: 0xD5f25773d3733937eBe3c11a1781DB4347B7D002
+  results:
+    description: >-
+      Array of addresses involved in the transaction.
+    type: array
+    items:
+      type: string
+      example: 1800000000
