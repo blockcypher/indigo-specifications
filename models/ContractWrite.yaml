@@ -1,0 +1,67 @@
+# Copyright 2023 BlockCypher
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: >-
+  represents a contract write query and response. Used to interact with
+  smart contracts. For example, ERC-20 transfer or anything else that
+  requires some kind of execution and as such creates a transaction.
+type: object
+required:
+  - function
+  - private
+properties:
+  function:
+    description: >-
+      The contract function to call.
+    type: string
+    example: balanceOf
+  params:
+    description: >-
+      Array of parameters if required by the function.
+    type: array
+    items:
+      type: string
+      example: 0xD5f25773d3733937eBe3c11a1781DB4347B7D002
+  max_fee_per_gas:
+    description: >-
+      Max Fee Per Gas refer to the max amount a user is willing to pay for their transaction.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 83490998906
+  max_priority_fee_per_gas:
+    description: >-
+      Max Priority Fee Per Gas refer to the max amount a user is willing to give to the miner.
+    type: string
+    format: bigint
+    minimum: 0
+    example: 1000000000
+  results:
+    description: >-
+      Array of addresses involved in the transaction.
+    type: array
+    items:
+      type: string
+      example: 1800000000
+  private:
+    description: >-
+      Private key associated with a funded Ethereum external
+      account used to publish a contract or execute a method.
+    type: string
+    example: 70e5a91bbb7e639b395c0b6e10965330653e2a7713fa6b4d6acf9d2faf2ec097
+  tx_hash:
+    description: >-
+      The hash of the created transaction.
+    type: string
+    example: f854aebae95150b379cc1187d848d58225f3c4157fe992bcd166f58bd5063449
