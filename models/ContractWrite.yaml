@@ -18,8 +18,14 @@ description: >-
   requires some kind of execution and as such creates a transaction.
 type: object
 required:
+  - address
   - function
 properties:
+  address:
+    description: >-
+      The email address from which the transaction will be initiated.
+    type: string
+    example: 0x738d145fAAbb1E00Cf5A017588A9C0F998318012
   function:
     description: >-
       The contract function to call.
