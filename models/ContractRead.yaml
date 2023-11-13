@@ -18,11 +18,11 @@ description: >-
   executed.
 type: object
 required:
-  - function
+  - method
 properties:
-  function:
+  method:
     description: >-
-      The contract function to call.
+      The contract method to call.
     type: string
     example: balanceOf
   params:
