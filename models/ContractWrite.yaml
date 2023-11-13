@@ -19,16 +19,16 @@ description: >-
 type: object
 required:
   - address
-  - function
+  - method
 properties:
   address:
     description: >-
       The email address from which the transaction will be initiated.
     type: string
     example: 0x738d145fAAbb1E00Cf5A017588A9C0F998318012
-  function:
+  method:
     description: >-
-      The contract function to call.
+      The contract method to call.
     type: string
     example: balanceOf
   params:
