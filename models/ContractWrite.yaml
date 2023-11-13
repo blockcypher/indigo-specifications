@@ -19,7 +19,6 @@ description: >-
 type: object
 required:
   - function
-  - private
 properties:
   function:
     description: >-
@@ -47,21 +46,3 @@ properties:
     format: bigint
     minimum: 0
     example: 1000000000
-  results:
-    description: >-
-      Array of addresses involved in the transaction.
-    type: array
-    items:
-      type: string
-      example: 1800000000
-  private:
-    description: >-
-      Private key associated with a funded Ethereum external
-      account used to publish a contract or execute a method.
-    type: string
-    example: 70e5a91bbb7e639b395c0b6e10965330653e2a7713fa6b4d6acf9d2faf2ec097
-  tx_hash:
-    description: >-
-      The hash of the created transaction.
-    type: string
-    example: f854aebae95150b379cc1187d848d58225f3c4157fe992bcd166f58bd5063449
