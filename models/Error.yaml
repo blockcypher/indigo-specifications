@@ -12,14 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-description: >-
-  An error response
+description: |
+  This error object is an enhanced error message that provide a detailed
+  information as to why a specific API call failed.
+  Every error is uniquely identified by a code and a message.
+  The error code is NOT equivalent to the HTTP status code.
 type: object
 required:
+  - code
   - message
 properties:
+  code:
+    description: |
+      Error code.
+    type: integer
+    example: 1
   message:
-    description: >-
-      Error message
+    description: |
+      Error message.
     type: string
-    example: "Invalid destination address"
+    example: "invalid address"
+  details:
+    type: object
+    description: |
+      Details about the failure. Can be a network level error message
+      or details about why the call failed.
+    example:
+      address: "0xdAC17F958D2ee523a2206206994597C13D"
+      error: "not a valid address"
