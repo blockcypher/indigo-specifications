@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-description: |
+description: >-
   This error object is an enhanced error message that provide a detailed
   information as to why a specific API call failed.
   Every error is uniquely identified by a code and a message.
