@@ -23,18 +23,18 @@ required:
   - message
 properties:
   code:
-    description: |
+    description: >-
       Error code.
     type: integer
     example: 1
   message:
-    description: |
+    description: >-
       Error message.
     type: string
     example: "invalid address"
   details:
     type: object
-    description: |
+    description: >-
       Details about the failure. Can be a network level error message
       or details about why the call failed.
     example:
