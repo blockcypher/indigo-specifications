@@ -26,6 +26,7 @@ properties:
     description: >-
       Error code.
     type: integer
+    format: uint64
     example: 1
   message:
     description: >-
@@ -39,4 +40,4 @@ properties:
       or details about why the call failed.
     example:
       address: "0xdAC17F958D2ee523a2206206994597C13D"
-      error: "not a valid address"
+      error: "not a valid Ethereum address"
