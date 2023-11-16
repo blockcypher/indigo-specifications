@@ -26,7 +26,7 @@ properties:
     description: >-
       Error code.
     type: integer
-    format: uint64
+    format: uint16
     example: 1
   message:
     description: >-
