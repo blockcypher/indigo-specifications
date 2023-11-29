@@ -495,7 +495,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/TransactionSkeleton"
         "500":
           description: unexpected error
           content:
