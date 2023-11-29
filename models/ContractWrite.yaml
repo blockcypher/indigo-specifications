@@ -23,7 +23,7 @@ required:
 properties:
   address:
     description: >-
-      The email address from which the transaction will be initiated.
+      The address from which the transaction will be initiated.
     type: string
     example: 0x738d145fAAbb1E00Cf5A017588A9C0F998318012
   method:
