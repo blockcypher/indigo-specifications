@@ -19,7 +19,6 @@ description: >-
 type: object
 required:
   - from
-  - to
   - value
 properties:
   from:
@@ -35,7 +34,7 @@ properties:
     example: 10
   to:
     description: >-
-      Recipient.
+      Recipient. Nil for contract creation.
     type: string
     example: 1N2f642sbgCMbNtXFajz9XDACDFnFzdXzV
   gas_limit:
