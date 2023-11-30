@@ -53,16 +53,11 @@ properties:
       $ref: "TransactionEvent.yaml"
   spent_by:
     description: >-
-      The transaction hash that spent this output. Only returned for outputs that have been spent. The spending transaction may be unconfirmed.
+      For utxo-based blockchain. The transaction hash that spent this output. Only returned for outputs that have been spent. The spending transaction may be unconfirmed.
     type: string
     example: 35832d6c70b98b54e9a53ab2d51176eb19ad11bc4505d6bb1ea6c51a68cb92ee
-  data_hex:
+  data:
     description: >-
-      A hex-encoded representation of an OP_RETURN data output, without any other script instructions. Only returned for outputs whose script_type is null-data.
+      A hex-encoded extra data, typically utilized in contract interactions or for sending messages to the recipient.
     type: string
-    example: 636861726c6579206c6f766573206865696469
-  data_string:
-    description: >-
-      An ASCII representation of an OP_RETURN data output, without any other script instructions. Only returned for outputs whose script_type is null-data and if its data falls into the visible ASCII range.
-    type: string
-    example: charley loves heidi
+    example: 0xa9059cbb000000000000000000000000d136546b3823fca4a3a8ab3340bbbed7cc02efce00000000000000000000000000000000000000000000000000000001f27aaff0
